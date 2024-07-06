@@ -28,20 +28,20 @@ function createMarcap(arr) {
             </a>
                 <ul class="galery-item-description">
                     <li>
-                        <p>Likes</p>
-                        <p>${likes}</p>
+                        <p class="paragraf">Likes</p>
+                        <p class="value">${likes}</p>
                     </li>
                     <li>
-                        <p>Views</p>
-                        <p>${views}</p>
+                        <p class="paragraf">Views</p>
+                        <p class="value">${views}</p>
                     </li>
                     <li>
-                        <p>Comments</p>
-                        <p>${comments}</p>
+                        <p class="paragraf">Comments</p>
+                        <p class="value">${comments}</p>
                     </li>
                     <li>
-                        <p>Downloads</p>
-                        <p>${downloads}</p>
+                        <p class="paragraf">Downloads</p>
+                        <p class="value">${downloads}</p>
                     </li>
                 </ul>
            </li>
