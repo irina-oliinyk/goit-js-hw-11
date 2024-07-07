@@ -5,16 +5,21 @@ import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-
-export function createMarcap(arr) {
-  const galleryList = document.querySelector('.gallery');
+ const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
+  
+const galleryList = document.querySelector('.gallery');
+  
+export function createMarcap(images) {
   galleryList.innerHTML = '';
   const markup = images
     .map(
-      ({ largeImageURL, previewURL, likes, views, comments, downloads }) =>
+      ({ largeImageURL, webformatURL ,tags, likes, views, comments, downloads }) =>
                `<li class="gallery-item">
         <a href="${largeImageURL}">
-          <img src="${webformatURL}" alt="" class="card-img"/>
+          <img src="${webformatURL}" alt="${tags}" width="320" height=200" class="card-img"/>
         </a>
         <ul class="galery-item-description">
           <li>
@@ -40,10 +45,7 @@ export function createMarcap(arr) {
         .join('');
     galleryList.insertAdjacentHTML('afterbegin', markup);
 
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
+  lightbox.refresh();
 };
 
 

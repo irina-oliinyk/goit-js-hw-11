@@ -17,7 +17,7 @@ import { createMarcap } from "./js/render-function.js";
 
 let inpurUser = document.querySelector('#name-input');
 const formEl = document.querySelector('.form');
-// const list = document.querySelector('.gallery');
+const galleryList = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
 
@@ -111,6 +111,7 @@ function handleSubmit(event) {
 
 
 function onFetchError(error) {
+  console.log(error);
    iziToast.show({
           backgroundColor: '#ef4040',
           close: false,
