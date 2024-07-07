@@ -1,35 +1,49 @@
 // Функції для відображення елементів інтерфейсу
 
+// Описаний у документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
+
+
 export function createMarcap(arr) {
-  clearGallery();
-  
-  return arr
+  const galleryList = document.querySelector('.gallery');
+  galleryList.innerHTML = '';
+  const markup = images
     .map(
       ({ largeImageURL, previewURL, likes, views, comments, downloads }) =>
-        `<li class="gallery gallery-item">
-           <a class="gallery-link" href="${largeImageURL}">
-            <img src="${previewURL}" alt="" width="300" height="140"/> 
-            </a>
-                <ul class="galery-item-description">
-                    <li>
-                        <p class="paragraf">Likes</p>
-                        <p class="value">${likes}</p>
-                    </li>
-                    <li>
-                        <p class="paragraf">Views</p>
-                        <p class="value">${views}</p>
-                    </li>
-                    <li>
-                        <p class="paragraf">Comments</p>
-                        <p class="value">${comments}</p>
-                    </li>
-                    <li>
-                        <p class="paragraf">Downloads</p>
-                        <p class="value">${downloads}</p>
-                    </li>
-                </ul>
-           </li>   
+               `<li class="gallery-item">
+        <a href="${largeImageURL}">
+          <img src="${webformatURL}" alt="" class="card-img"/>
+        </a>
+        <ul class="galery-item-description">
+          <li>
+            <p class="count-text">Likes</p>
+            <p class="count">${likes}</p>
+          </li>
+          <li>
+            <p class="count-text">Views</p>
+            <p class="count">${views}</p>
+          </li>
+          <li>
+            <p class="count-text">Comments</p>
+            <p class="count">${comments}</p>
+          </li>
+          <li>
+            <p class="count-text">Downloads</p>
+            <p class="count">${downloads}</p>
+          </li>
+        </ul>
+      </li>
       `
     )
-    .join('');
+        .join('');
+    galleryList.insertAdjacentHTML('afterbegin', markup);
+
+  const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
 };
+
+

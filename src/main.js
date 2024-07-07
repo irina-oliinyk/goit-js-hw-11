@@ -4,21 +4,18 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import icon from './img/error.svg'
 
-// Описаний у документації
-import SimpleLightbox from "simplelightbox";
-// Додатковий імпорт стилів
-import "simplelightbox/dist/simple-lightbox.min.css";
 
 
-import { fetchphoto } from "./js/pixabay-api";
-import { createMarcap } from "./js/render-function";
+
+import { fetchphoto } from "./js/pixabay-api.js";
+import { createMarcap } from "./js/render-function.js";
 
 
 
 let inpurUser = document.querySelector('#name-input');
 const formEl = document.querySelector('.form');
 const containerCard = document.querySelector('.card-container');
-const list = document.querySelector('.gallery-conteiner');
+const list = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
 
@@ -91,6 +88,7 @@ function handleSubmit(event) {
       let hitsArray = data.hits;
       console.log(hitsArray);
       displayImages(hitsArray);
+      createMarcap(data.hits);
       loader.classList.add('visually-hidden');
       
     })// запускаємо функцію, яка відмалює наші карточки
@@ -159,15 +157,10 @@ function displayImages(hitsArray) {
           messageSize: '16px',
           message: 'Sorry, das ist alles, was wir haben!'
     });
-    list.insertAdjacentHTML('afterbegin', createMarcap(hitsArray));
+    createMarcap(hitsArray);
   } else {
-    list.insertAdjacentHTML('afterbegin', createMarcap(hitsArray));
+    createMarcap(hitsArray);
   }
 }
 
 
-var lightbox = new SimpleLightbox('.gallery-item a', { 'captionsData': 'alt', 'captionDelay': 250, 'preloading': true });
- 
-console.log(lightbox);
-
-lightbox.refresh();
