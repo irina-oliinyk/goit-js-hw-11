@@ -4,7 +4,10 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import icon from './img/error.svg'
 
-
+// // Описаний у документації
+// import SimpleLightbox from "simplelightbox";
+// // Додатковий імпорт стилів
+// import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 import { fetchphoto } from "./js/pixabay-api.js";
@@ -14,45 +17,51 @@ import { createMarcap } from "./js/render-function.js";
 
 let inpurUser = document.querySelector('#name-input');
 const formEl = document.querySelector('.form');
-const containerCard = document.querySelector('.card-container');
-const list = document.querySelector('.gallery');
+// const list = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
 
-// function createMarcap(arr) {
-//   clearGallery();
-  
-//   return arr
+//  function createMarcap(arr) {
+//   const galleryList = document.querySelector('.gallery');
+//   galleryList.innerHTML = '';
+//   const markup = arr
 //     .map(
-//       ({ largeImageURL, previewURL, likes, views, comments, downloads }) =>
-//         `<li class="gallery gallery-item">
-//            <a class="gallery-link" href="${largeImageURL}">
-//             <img src="${previewURL}" alt="" width="300" height="140"/> 
-//             </a>
-//                 <ul class="galery-item-description">
-//                     <li>
-//                         <p class="paragraf">Likes</p>
-//                         <p class="value">${likes}</p>
-//                     </li>
-//                     <li>
-//                         <p class="paragraf">Views</p>
-//                         <p class="value">${views}</p>
-//                     </li>
-//                     <li>
-//                         <p class="paragraf">Comments</p>
-//                         <p class="value">${comments}</p>
-//                     </li>
-//                     <li>
-//                         <p class="paragraf">Downloads</p>
-//                         <p class="value">${downloads}</p>
-//                     </li>
-//                 </ul>
-//            </li>   
+//       ({ largeImageURL, webformatURL, likes, views, comments, downloads }) =>
+//                `<li class="gallery-item">
+//         <a href="${largeImageURL}">
+//           <img src="${webformatURL}" alt="" class="card-img"/>
+//         </a>
+//         <ul class="galery-item-description">
+//           <li>
+//             <p class="count-text">Likes</p>
+//             <p class="count">${likes}</p>
+//           </li>
+//           <li>
+//             <p class="count-text">Views</p>
+//             <p class="count">${views}</p>
+//           </li>
+//           <li>
+//             <p class="count-text">Comments</p>
+//             <p class="count">${comments}</p>
+//           </li>
+//           <li>
+//             <p class="count-text">Downloads</p>
+//             <p class="count">${downloads}</p>
+//           </li>
+//         </ul>
+//       </li>
 //       `
 //     )
-//     .join('');
-// };
+//         .join('');
+//     galleryList.insertAdjacentHTML('afterbegin', markup);
 
+//   const lightbox = new SimpleLightbox('.gallery a', {
+//     captionsData: 'alt',
+//     captionDelay: 250,
+//   });
+   
+//    lightbox.refresh();
+// };
 
 
 
@@ -83,12 +92,13 @@ function handleSubmit(event) {
    console.log(queryValue);
     inpurUser.value = '';
     let valueCategori = queryValue.toLowerCase();
+    loader.classList.add('visually-hidden');
   fetchphoto(valueCategori)
     .then(data => {
       let hitsArray = data.hits;
       console.log(hitsArray);
       displayImages(hitsArray);
-      createMarcap(data.hits);
+      createMarcap(hitsArray);
       loader.classList.add('visually-hidden');
       
     })// запускаємо функцію, яка відмалює наші карточки
@@ -119,7 +129,7 @@ function onFetchError(error) {
 
 
 function clearGallery() {
-  list.innerHTML = '';
+  galleryList.innerHTML = '';
 }
 
 function displayImages(hitsArray) {

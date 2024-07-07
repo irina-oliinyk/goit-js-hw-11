@@ -77,15 +77,13 @@ ul{
 
 
 
-.card-container{
- 
-}
+
 
 .gallery{
 display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: space-evenly;
+flex-wrap: wrap;
+gap: 24px;
+  ustify-content: space-evenly;
 
 }
 
